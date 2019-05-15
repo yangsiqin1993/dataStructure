@@ -25,17 +25,35 @@ public class LinkList<E> implements List<E> {
 
     @Override
     public E get(int index) {
-        if(index >= listLength) {
+        if(index >= listLength || index < 0) {
             throw new IllegalArgumentException("index is large than max index ");
         }
-        if(index == 0) {
-
+        Node<E> target = first;
+        int currIndex = 0;
+        while (currIndex < index){
+            target = target.getNext();
+            currIndex++;
         }
-        return null;
+        return target.getData();
     }
 
     @Override
     public int indexOf(E e) {
+        int targetIndex = -1;
+        Node<E> target = first;
+        while (target.getNext() != null) {
+            if(e == null) {
+                if(target.getData() == null) {
+                    return targetIndex;
+                }
+            }else {
+                if(e.equals(target.getData())){
+                    return targetIndex;
+                }
+            }
+            target = target.getNext();
+        }
+
         return 0;
     }
 
