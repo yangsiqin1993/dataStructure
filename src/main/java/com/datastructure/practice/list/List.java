@@ -1,6 +1,5 @@
 package com.datastructure.practice.list;
 
-import java.util.Iterator;
 
 /**
  * 线性表

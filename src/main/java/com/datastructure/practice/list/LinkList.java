@@ -14,8 +14,8 @@ public class LinkList<E> implements List<E> {
             listLength++;
             return true;
         }
-        Node<E> node = first.getNext();
-        while (node != null) {
+        Node<E> node = first;
+        while (node.getNext() != null) {
             node = node.getNext();
         }
         node.setNext(new Node<>(e,null));
@@ -40,41 +40,80 @@ public class LinkList<E> implements List<E> {
     @Override
     public int indexOf(E e) {
         int targetIndex = -1;
+        int tempIndex = -1;
         Node<E> target = first;
-        while (target.getNext() != null) {
+        while (target != null) {
+            tempIndex++;
             if(e == null) {
                 if(target.getData() == null) {
-                    return targetIndex;
+                    targetIndex = tempIndex;
+                    break;
                 }
             }else {
                 if(e.equals(target.getData())){
-                    return targetIndex;
+                    targetIndex = tempIndex;
+                    break;
                 }
             }
             target = target.getNext();
         }
-
-        return 0;
+        return targetIndex;
     }
 
     @Override
     public boolean add(int index, E e) {
-        return false;
+        if(index > listLength) {
+            throw new IllegalArgumentException("index is large than max index.");
+        }
+        if(index == listLength) {
+            return add(e);
+        }
+        Node<E> node = first;
+        for (int i = 1; i < index; i++) {
+            node = node.getNext();
+        }
+        Node<E> newNode = new Node<>(e,node.getNext());
+        node.setNext(newNode);
+        return true;
     }
 
     @Override
     public E remove(int index) {
-        return null;
+        if(index > listLength - 1) {
+            throw new IllegalArgumentException("index is large than max index.");
+        }
+        if(index == 0) {
+            E data = first.getData();
+            first = first.getNext();
+            listLength--;
+            return data;
+        }
+        Node<E> node = first;
+        for (int i = 1; i < index; i++) {
+            node = node.getNext();
+        }
+        Node<E> shouldRemove = node.getNext();
+        node.setNext(shouldRemove.getNext());
+        listLength--;
+        return shouldRemove.getData();
     }
 
     @Override
     public int size() {
-        return 0;
+        return listLength;
     }
 
     @Override
     public void clear() {
-
+        Node<E> node = first;
+        while (node != null) {
+            Node<E> next = node.getNext();
+            node.setNext(null);
+            node.setData(null);
+            node = next;
+        }
+        first = null;
+        listLength = 0;
     }
 
     @Data
