@@ -3,11 +3,11 @@ package com.datastructure.practice.list;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class StaticLinkListTest {
+public class CycleLinkListTest {
 
     @Test
     public void addTest(){
-        List list = new StaticLinkList<Integer>(5);
+        List list = new CycleLinkList<Integer>();
         list.add(1);
         list.add(2);
         list.add(3);
@@ -23,7 +23,7 @@ public class StaticLinkListTest {
 
     @Test
     public void getTest(){
-        List<Integer> list = new StaticLinkList<Integer>(5);
+        List<Integer> list = new CycleLinkList<Integer>();
         list.add(1);
         list.add(2);
         list.add(3);
@@ -44,7 +44,7 @@ public class StaticLinkListTest {
 
     @Test
     public void indexOfTest(){
-        List<Integer> list = new StaticLinkList<Integer>(5);
+        List<Integer> list = new CycleLinkList<Integer>();
         list.add(1);
         list.add(2);
         list.add(3);
@@ -61,15 +61,11 @@ public class StaticLinkListTest {
 
     @Test
     public void addTest2(){
-        List list = new StaticLinkList<Integer>(5);
+        List list = new CycleLinkList<Integer>();
         list.add(1);
-        System.out.println(list);
         list.add(2);
-        System.out.println(list);
         list.add(4);
-        System.out.println(list);
         list.add(5);
-        System.out.println(list);
         Assert.assertTrue(list.size() == 4);
         try {
             list.add(5,6);
@@ -77,7 +73,6 @@ public class StaticLinkListTest {
             Assert.assertTrue(e instanceof IllegalArgumentException);
         }
         list.add(2,3);
-        System.out.println(list);
         Assert.assertTrue(list.indexOf(1) == 0);
         Assert.assertTrue(list.indexOf(2) == 1);
         Assert.assertTrue(list.indexOf(3) == 2);
@@ -87,7 +82,7 @@ public class StaticLinkListTest {
 
     @Test
     public void removeTest(){
-        List<Integer> list = new StaticLinkList<Integer>(5);
+        List<Integer> list = new CycleLinkList<Integer>();
         list.add(1);
         list.add(2);
         list.add(3);
@@ -110,7 +105,7 @@ public class StaticLinkListTest {
 
     @Test
     public void sizeTest(){
-        List<Integer> list = new StaticLinkList<Integer>(5);
+        List<Integer> list = new CycleLinkList<Integer>();
         list.add(1);
         list.add(2);
         list.add(3);
@@ -132,7 +127,7 @@ public class StaticLinkListTest {
 
     @Test
     public void clearTest(){
-        List<Integer> list = new StaticLinkList<Integer>(5);
+        List<Integer> list = new CycleLinkList<Integer>();
         list.add(1);
         list.add(2);
         list.add(3);

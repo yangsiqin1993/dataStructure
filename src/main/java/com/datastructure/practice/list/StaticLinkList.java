@@ -18,7 +18,11 @@ public class StaticLinkList<E> implements List<E>{
         maxLength = capacity;
         Node<E> node = idleFirstNode = new Node(null,0);
         for (int i = 0; i < capacity; i++) {
-            datas[i] = new Node(null, i + 1);
+            if(i == capacity-1){
+                datas[i] = new Node(null, null);
+            }else {
+                datas[i] = new Node(null, i + 1);
+            }
         }
         dataFirstNode = new Node(null,null);
     }
@@ -91,13 +95,14 @@ public class StaticLinkList<E> implements List<E>{
             add(e);
         }
         Node<E> node = dataFirstNode;
-        for (int i = 0; i <= index; i++) {
+        for (int i = 0; i < index; i++) {
             node = (Node<E>) datas[node.next];
         }
         int idleIndex = idleFirstNode.next;
         Node<E> temp = (Node<E>) datas[idleIndex];
-        datas[idleIndex] = new Node<E>(e,null);
+        datas[idleIndex] = new Node<E>(e,node.next);
         idleFirstNode.next = temp.next;
+        node.next = idleIndex;
         listLength++;
         return true;
     }
